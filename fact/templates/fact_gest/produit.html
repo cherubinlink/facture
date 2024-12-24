@@ -1,0 +1,138 @@
+{% extends 'navigateur/base.html' %}
+
+{% load static %}
+
+{% block title %}Produit{% endblock %}
+
+
+{% block fact %}
+
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+            <!-- menu verticale -->
+            {% include 'navigateur/nav1.html' %}
+
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                     <!-- menu verticale -->
+                    {% include 'navigateur/nav3.html' %}
+
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-header start -->
+                                    <div class="page-header card">
+                                        <div class="row align-items-end">
+                                            <div class="col-lg-8">
+                                                <div class="page-header-title">
+                                                    <i class="icofont icofont-table bg-c-blue"></i>
+                                                    <div class="d-inline">
+                                                        <h4>Gestions Produits</h4>
+                                                        <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="page-header-breadcrumb">
+                                                   <ul class="breadcrumb-title">
+                                                    <li class="breadcrumb-item">
+                                                        <a href="index.html">
+                                                            <i class="icofont icofont-home"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">Accueil</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">Ajouter</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Page-header end -->
+                                
+                                <!-- Page-body start -->
+                                <div class="page-body">
+                                    <!-- Basic table card start -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Total Produits</h5>
+                                            <span>
+                                                <button class="btn btn-danger"><i class="icofont icofont-user-alt-3"></i>Supprimer selectionner</button>
+                                            </span>
+                                            <div class="card-header-right">    <ul class="list-unstyled card-option">        <li><i class="icofont icofont-simple-left "></i></li>        <li><i class="icofont icofont-maximize full-card"></i></li>        <li><i class="icofont icofont-minus minimize-card"></i></li>        <li><i class="icofont icofont-refresh reload-card"></i></li>        <li><i class="icofont icofont-error close-card"></i></li>    </ul></div>
+                                        </div>
+                                        <div class="card-block table-border-style">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Noms</th>
+                                                            <th>Prix</th>
+                                                            <th>Stoke</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <input type="checkbox" id="">
+                                                            </th>
+                                                            <td>Mark</td>
+                                                            <td>Otto</td>
+                                                            <td>@mdo</td>
+                                                            <td>
+                                                               
+                                                                <a href="" class="btn btn-primary btn-outline-primary btn-icon"><i class="icofont icofont-edit"></i></a>
+                                                                <a href="" class="btn btn-danger btn-outline-danger btn-icon"><i class="icofont icofont-check-circled"></i></a>
+                                                               
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Basic table card end -->
+                                </div>
+                                <!-- Page-body end -->
+                            </div>
+                        </div>
+                        <!-- Main-body end -->
+
+                        <div id="styleSelector">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

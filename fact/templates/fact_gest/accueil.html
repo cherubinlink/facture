@@ -1,0 +1,268 @@
+{% extends 'navigateur/base.html' %}
+
+{% load static %}
+
+{% block title %}Accueil{% endblock %}
+
+
+{% block fact %}
+
+
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+             <!-- menu horizontale -->
+        {% include 'navigateur/nav1.html' %}
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+                 <!-- menu verticale -->
+                {% include 'navigateur/nav2.html' %}
+
+                 <!-- informations -->
+                <div class="pcoded-content">
+                    <div class="pcoded-inner-content">
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <!-- Page-header start -->
+                                <div class="page-header card">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-8">
+                                            <div class="page-header-title">
+                                                <i class="icofont icofont-layout bg-c-blue"></i>
+                                                <div class="d-inline">
+                                                    <h4>Gestion facture</h4>
+                                                    <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="page-header-breadcrumb">
+                                                <ul class="breadcrumb-title">
+                                                    <li class="breadcrumb-item">
+                                                        <a href="index.html">
+                                                            <i class="icofont icofont-home"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">Accueil</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">Creer un group</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Page-header end -->
+
+                                <!-- Page-body start -->
+                                <div class="page-body">
+                                    <!-- Row start -->
+                                    <div class="row">
+                                        <!-- Multiple Open Accordion start -->
+                                        <div class="col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="card-header-text">MULTIPLE OPEN ACCORDION</h5>
+                                                </div>
+                                                <div class="card-block accordion-block">
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true">
+                                                        <div class="accordion-panel">
+                                                            <div class="accordion-heading" role="tab" id="headingOne">
+                                                                <h3 class="card-title accordion-title">
+                                                                    <a class="accordion-msg" data-toggle="collapse"
+                                                                    data-parent="#accordion" href="#collapseOne"
+                                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                                    Lorem Message 1
+                                                                </a>
+                                                            </h3>
+                                                        </div>
+                                                        <div id="collapseOne" class="panel-collapse collapse in"
+                                                        role="tabpanel" aria-labelledby="headingOne">
+                                                        <div class="accordion-content accordion-desc">
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text of the printing
+                                                                and typesetting industry. Lorem Ipsum has been
+                                                                the industry's standard dummy text ever since
+                                                                the 1500s, when an unknown printer took a galley
+                                                                of type and scrambled it to make a type specimen
+                                                                book. It has survived not only five centuries,
+                                                                but also the leap into electronic typesetting,
+                                                                remaining essentially unchanged. It was
+                                                                popularised in the 1960s with the release of
+                                                                Letraset sheets containing Lorem Ipsum passages,
+                                                                and more recently with desktop publishing
+                                                                software like Aldus PageMaker including versions
+                                                                of Lorem Ipsum.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-panel">
+                                                    <div class="accordion-heading" role="tab" id="headingTwo">
+                                                        <h3 class="card-title accordion-title">
+                                                            <a class="accordion-msg" data-toggle="collapse"
+                                                            data-parent="#accordion" href="#collapseTwo"
+                                                            aria-expanded="false"
+                                                            aria-controls="collapseTwo">
+                                                            Lorem Message 2
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                                <div id="collapseTwo" class="panel-collapse collapse"
+                                                role="tabpanel" aria-labelledby="headingTwo">
+                                                <div class="accordion-content accordion-desc">
+                                                    <p>
+                                                        Lorem Ipsum is simply dummy text of the printing
+                                                        and typesetting industry. Lorem Ipsum has been
+                                                        the industry's standard dummy text ever since
+                                                        the 1500s, when an unknown printer took a galley
+                                                        of type and scrambled it to make a type specimen
+                                                        book. It has survived not only five centuries,
+                                                        but also the leap into electronic typesetting,
+                                                        remaining essentially unchanged. It was
+                                                        popularised in the 1960s with the release of
+                                                        Letraset sheets containing Lorem Ipsum passages,
+                                                        and more recently with desktop publishing
+                                                        software like Aldus PageMaker including versions
+                                                        of Lorem Ipsum.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-panel">
+                                            <div class=" accordion-heading" role="tab"
+                                            id="headingThree">
+                                            <h3 class="card-title accordion-title">
+                                                <a class="accordion-msg" data-toggle="collapse"
+                                                data-parent="#accordion" href="#collapseThree"
+                                                aria-expanded="false"
+                                                aria-controls="collapseThree">
+                                                Lorem Message 3
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse show"
+                                    role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="accordion-content accordion-desc">
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing
+                                            and typesetting industry. Lorem Ipsum has been
+                                            the industry's standard dummy text ever since
+                                            the 1500s, when an unknown printer took a galley
+                                            of type and scrambled it to make a type specimen
+                                            book. It has survived not only five centuries,
+                                            but also the leap into electronic typesetting,
+                                            remaining essentially unchanged. It was
+                                            popularised in the 1960s with the release of
+                                            Letraset sheets containing Lorem Ipsum passages,
+                                            and more recently with desktop publishing
+                                            software like Aldus PageMaker including versions
+                                            of Lorem Ipsum.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Multiple Open Accordion ends -->
+            <!-- Single Open Accordion start -->
+            <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-header-text">Single Open Accordion</h5>
+                        </div>
+                        <div class="card-block accordion-block">
+                            <div class="accordion-box" id="single-open">
+                                <a class="accordion-msg">Lorem Message 1</a>
+                                <div class="accordion-desc">
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of the printing and
+                                        typesetting industry. Lorem Ipsum has been the
+                                        industry's standard dummy text ever since the 1500s,
+                                        when an unknown printer took a galley of type and
+                                        scrambled it to make a type specimen book. It has
+                                        survived not only five centuries, but also the leap into
+                                        electronic typesetting, remaining essentially unchanged.
+                                        It was popularised in the 1960s with the release of
+                                        Letraset sheets containing Lorem Ipsum passages, and
+                                        more .
+                                    </p>
+                                </div>
+                                <a class="accordion-msg">Lorem Message 2</a>
+                                <div class="accordion-desc">
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of the printing and
+                                        typesetting industry. Lorem Ipsum has been the
+                                        industry's standard dummy text ever since the 1500s,
+                                        when an unknown printer took a galley of type and
+                                        scrambled it to make a type specimen book. It has
+                                        survived not only five centuries, but also the leap into
+                                        electronic typesetting, remaining essentially unchanged.
+                                        It was popularised in the 1960s with the release of
+                                        Letraset sheets containing Lorem Ipsum passages, and
+                                        more .
+                                    </p>
+                                </div>
+                                <a class="accordion-msg">Lorem Message 3</a>
+                                <div class="accordion-desc">
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of the printing and
+                                        typesetting industry. Lorem Ipsum has been the
+                                        industry's standard dummy text ever since the 1500s,
+                                        when an unknown printer took a galley of type and
+                                        scrambled it to make a type specimen book. It has
+                                        survived not only five centuries, but also the leap into
+                                        electronic typesetting, remaining essentially unchanged.
+                                        It was popularised in the 1960s with the release of
+                                        Letraset sheets containing Lorem Ipsum passages, and
+                                        more .
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- Single Open Accordion ends -->
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="fixed-button">
+	<a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
+	  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Haut
+	</a>
+</div>
+
+
+
+
+
+
+{% endblock %}
