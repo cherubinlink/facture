@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Produit{% endblock %}
+{% block title %}Facture paye{% endblock %}
 
 
 {% block fact %}
@@ -43,7 +43,7 @@
                             <div class="pcoded-search">
                                 <span class="searchbar-toggle">  </span>
                                 <div class="pcoded-search-box ">
-                                    <input type="text" placeholder="Recherche un produit">
+                                    <input type="text" placeholder="Recherche une facture">
                                     <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
                                 </div>
                             </div>
@@ -58,8 +58,8 @@
                                                 <div class="page-header-title">
                                                     <i class="icofont icofont-table bg-c-blue"></i>
                                                     <div class="d-inline">
-                                                        <h4>Gestions Produits</h4>
-                                                        <span>bien definir le prix d'achat et vente pour conaitre le revenue de chaque produits </span>
+                                                        <h4>Gestions factures</h4>
+                                                        <span>facture solde par le client</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,7 +87,7 @@
                                     <!-- Basic table card start -->
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Total Produits</h5>
+                                            <h5>Total facture payes</h5>
                                             <span>
                                                 <button class="btn btn-danger"><i class="icofont icofont-user-alt-3"></i>Supprimer selectionner</button>
                                             </span>
@@ -99,10 +99,13 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Noms</th>
-                                                            <th>Prix d'achat</th>
-                                                            <th>Prix de vente</th>
-                                                            <th>Stoke</th>
+                                                            <th>Numero</th>
+                                                            <th>Client</th>
+                                                            <th>Total</th>
+                                                            <th>Total_avance</th>
+                                                            <th>Date</th>
+                                                            <th>Status</th>
+                                                            <th>Livrer</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -113,8 +116,11 @@
                                                             </th>
                                                             <td>Mark</td>
                                                             <td>Otto</td>
-                                                            <td>@mdo</td>
-                                                            <td>@mdo</td>
+                                                            <td>Otto</td>
+                                                            <td>Otto</td>
+                                                            <td>Otto</td>
+                                                            <td>Otto</td>
+                                                            <td>Otto</td>
                                                             <td>
                                                                
                                                                 <a href="" class="btn btn-primary btn-outline-primary btn-icon"><i class="icofont icofont-edit"></i></a>

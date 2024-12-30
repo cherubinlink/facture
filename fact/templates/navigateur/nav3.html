@@ -46,7 +46,7 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="active">
-                        <a href="">
+                        <a href="{% url 'entreprise' %}">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Entreprise1</span>
                             <span class="pcoded-mcaret"></span>
@@ -63,155 +63,8 @@
 
                 </ul>
             </li>
-            <li class="pcoded-hasmenu active pcoded-trigger">
-                <a href="javascript:void(0)">
-                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Groupes2</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-                <ul class="pcoded-submenu">
-                    <li class="active">
-                        <a href="">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Entreprise1</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Entreprise2</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                   
-
-                </ul>
-            </li>
-        </ul>
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Clients &amp; Groups</div>
-        <ul class="pcoded-item pcoded-left-item">
-            <li>
-                <a href="">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>C</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Clients</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>   
-
-            <li>
-                <a href="">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>G</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Groups</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li> 
-        </ul>
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Produits &amp; Services</div>
-        <ul class="pcoded-item pcoded-left-item">
-            <li>
-                <a href="{% url 'produit' %}">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>P</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Produits</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="bs-basic-table.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>S</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Services</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
             
         </ul>
-
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Factures &amp; Caises</div>
-        <ul class="pcoded-item pcoded-left-item">
-            <li>
-                <a href="chart.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>TC</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Ticket Caise</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>F</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Factures</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FA</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Factures Avancee</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FN</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Factures Non Payes</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FP</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Factures Payes</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>ST</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Suivie de Temps</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-           
-            
-        </ul>
-
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Rapports &amp; Donnees</div>
-        <ul class="pcoded-item pcoded-left-item">
-            <li>
-                <a href="chart.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Depenses</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>R</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Revenues</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>R</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Rapports</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>R</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Recurent</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>PR</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Payement Recus</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>   
-        </ul>
-        
+          
     </div>
 </nav>

@@ -1,0 +1,178 @@
+
+
+{% load static %}
+
+<nav class="pcoded-navbar">
+    <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+    <div class="pcoded-inner-navbar main-menu">
+        <div class="">
+            <div class="main-menu-header">
+                <img class="img-40 img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="User-Profile-Image">
+                <div class="user-details">
+                    <span>John Doe</span>
+                    <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
+                </div>
+            </div>
+
+            <div class="main-menu-content">
+                <ul>
+                    <li class="more-details">
+                        <a href="#"><i class="ti-user"></i>Voir Profile</a>
+                        <a href="#!"><i class="ti-settings"></i>Parametre</a>
+                        <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Se Deconnecter</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="pcoded-search">
+            <span class="searchbar-toggle">  </span>
+            <div class="pcoded-search-box ">
+                <input type="text" placeholder="Search">
+                <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
+            </div>
+        </div>
+        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Menu</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li class="">
+                <a href="{% url 'accueil-user' %}">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>A</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Accueil</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="{% url 'entreprise' %}">
+                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>E</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Entreprise</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+           
+           
+        </ul>
+        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Clients &amp; Groups</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li>
+                <a href="{% url 'client' %}">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>C</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Clients</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>   
+
+            <li>
+                <a href="">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>G</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Groups</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li> 
+        </ul>
+        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Produits &amp; Services</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li>
+                <a href="{% url 'produit' %}">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>P</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Produits</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'service' %}">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>S</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Services</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            
+        </ul>
+
+        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Factures &amp; Caises</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li>
+                <a href="chart.html">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>TC</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Ticket Caise</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'facture' %}">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>F</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Factures</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="map-google.html">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FA</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Factures Avancee</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'facture-nom-paye' %}">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FN</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Factures Non Payes</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'facture-paye' %}">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FP</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Factures Payes</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="map-google.html">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>ST</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Suivie de Temps</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+           
+            
+        </ul>
+
+        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Rapports &amp; Donnees</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li>
+                <a href="chart.html">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>D</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Depenses</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="map-google.html">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>R</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Revenues</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="map-google.html">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>R</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Rapports</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="map-google.html">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>R</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Recurent</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="map-google.html">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>PR</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Payement Recus</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>   
+        </ul>
+        
+    </div>
+</nav>
