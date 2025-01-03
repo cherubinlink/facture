@@ -28,5 +28,8 @@ urlpatterns = [
     path('facture_paye',views.facture_paye,name='facture-paye'),
     
     # facture nom paye
-    path('facture_nom_paye',views.facture_nom_paye,name='facture-nom-paye')
+    path('facture_nom_paye',views.facture_nom_paye,name='facture-nom-paye'),
+    
+    # sav
+    path('sav',views.sav,name='sav')
 ]

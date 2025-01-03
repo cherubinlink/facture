@@ -41,3 +41,8 @@ def facture_nom_paye(request):
     return render(request,'fact_gest/facture_nom_paye.html')
 
 
+# service apres ventes
+def sav(request):
+    return render(request,'fact_gest/sav.html')
+
+

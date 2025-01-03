@@ -18,7 +18,8 @@
                 <ul>
                     <li class="more-details">
                         <a href="#"><i class="ti-user"></i>Voir Profile</a>
-                        <a href="#!"><i class="ti-settings"></i>Parametre</a>
+                        <a href="#"><i class="ti-alert"></i>Service apres vente</a>
+                        <a href="{% url 'parametre' %}"><i class="ti-settings"></i>Parametre</a>
                         <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Se Deconnecter</a>
                     </li>
                 </ul>
@@ -50,7 +51,7 @@
            
            
         </ul>
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Clients &amp; Groups</div>
+        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Clients &amp; S A V</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>
                 <a href="{% url 'client' %}">
@@ -61,9 +62,9 @@
             </li>   
 
             <li>
-                <a href="">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>G</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Groups</span>
+                <a href="{% url 'sav' %}">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>S</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Service apres ventes</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li> 

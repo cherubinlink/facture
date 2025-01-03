@@ -71,7 +71,7 @@
                                                             <i class="icofont icofont-home"></i>
                                                         </a>
                                                     </li>
-                                                    <li class="breadcrumb-item"><a href="#!">Accueil</a>
+                                                    <li class="breadcrumb-item"><a href="{% url 'accueil-user' %}">Accueil</a>
                                                     </li>
                                                     <li class="breadcrumb-item"><a href="#!">Ajouter</a>
                                                     </li>
@@ -89,7 +89,7 @@
                                         <div class="card-header">
                                             <h5>Total facture nom payes</h5>
                                             <span>
-                                                <button class="btn btn-danger"><i class="icofont icofont-user-alt-3"></i>Supprimer selectionner</button>
+                                                <button class="btn btn-danger"><i class="ti-trash"></i>Supprimer selectionner</button>
                                             </span>
                                             <div class="card-header-right">    <ul class="list-unstyled card-option">        <li><i class="icofont icofont-simple-left "></i></li>        <li><i class="icofont icofont-maximize full-card"></i></li>        <li><i class="icofont icofont-minus minimize-card"></i></li>        <li><i class="icofont icofont-refresh reload-card"></i></li>        <li><i class="icofont icofont-error close-card"></i></li>    </ul></div>
                                         </div>
@@ -103,6 +103,7 @@
                                                             <th>Client</th>
                                                             <th>Total</th>
                                                             <th>Total_avance</th>
+                                                            <th>Reste</th>
                                                             <th>Date</th>
                                                             <th>Status</th>
                                                             <th>Livrer</th>
@@ -121,10 +122,11 @@
                                                             <td>Otto</td>
                                                             <td>Otto</td>
                                                             <td>Otto</td>
+                                                            <td>Otto</td>
                                                             <td>
                                                                
-                                                                <a href="" class="btn btn-primary btn-outline-primary btn-icon"><i class="icofont icofont-edit"></i></a>
-                                                                <a href="" class="btn btn-danger btn-outline-danger btn-icon"><i class="icofont icofont-check-circled"></i></a>
+                                                                <a href="" class="btn btn-primary btn-outline-primary btn-icon"><i class="ti-pencil"></i></a>
+                                                                <a href="" class="btn btn-success btn-outline-success btn-icon"><i class="icofont icofont-eye"></i></a>
                                                                
                                                             </td>
                                                         </tr>
