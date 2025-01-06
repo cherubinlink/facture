@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     'fact_user',
     'fact_gest',
+    'demo',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,7 @@ DATABASES = {
     },
     'mysql_db': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'factapp',
+        'NAME': 'facture',
         'USER': 'links',
         'PASSWORD': 'programmelink',
         'HOST': 'localhost',
@@ -143,3 +144,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'fact_user.Utilisateur'

@@ -7,4 +7,7 @@ urlpatterns = [
     
     # parametre
     path('parametre',views.parametre,name='parametre'),
+    
+    # profile
+    path('profile',views.profile,name='profile')
 ]

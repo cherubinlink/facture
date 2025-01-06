@@ -17,7 +17,7 @@
             <div class="main-menu-content">
                 <ul>
                     <li class="more-details">
-                        <a href="#"><i class="ti-user"></i>Voir Profile</a>
+                        <a href="{% url 'profile' %}"><i class="ti-user"></i>Voir Profile</a>
                         <a href="#"><i class="ti-alert"></i>Service apres vente</a>
                         <a href="{% url 'parametre' %}"><i class="ti-settings"></i>Parametre</a>
                         <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Se Deconnecter</a>
@@ -34,13 +34,7 @@
         </div>
         <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Menu</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li class="">
-                <a href="{% url 'accueil-user' %}">
-                    <span class="pcoded-micon"><i class="ti-home"></i><b>A</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Accueil</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
+
             <li class="">
                 <a href="{% url 'entreprise' %}">
                     <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>E</b></span>
@@ -48,8 +42,14 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-           
-           
+            <li class="">
+                <a href="{% url 'accueil-user' %}">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>A</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Accueil</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            
         </ul>
         <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Clients &amp; S A V</div>
         <ul class="pcoded-item pcoded-left-item">
