@@ -1,0 +1,156 @@
+{% extends 'navigateur/base.html' %}
+
+{% load static %}
+
+{% block title %}creer group{% endblock %}
+
+
+{% block fact %}
+
+ <!-- Pre-loader start -->
+ <div class="theme-loader">
+    <div class="ball-scale">
+        <div class='contain'>
+            <div class="ring"><div class="frame"></div></div>
+            <div class="ring"><div class="frame"></div></div>
+            <div class="ring"><div class="frame"></div></div>
+            <div class="ring"><div class="frame"></div></div>
+            <div class="ring"><div class="frame"></div></div>
+            <div class="ring"><div class="frame"></div></div>
+            <div class="ring"><div class="frame"></div></div>
+            <div class="ring"><div class="frame"></div></div>
+            <div class="ring"><div class="frame"></div></div>
+            <div class="ring"><div class="frame"></div></div>
+        </div>
+    </div>
+</div>
+<!-- Pre-loader end -->
+
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <!-- menu verticale -->
+        {% include 'navigateur/nav1.html' %}
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+                 <!-- menu verticale -->
+                {% include 'navigateur/nav3.html' %}
+
+                
+
+                <div class="pcoded-content">
+                    <div class="pcoded-inner-content">
+
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <!-- Page-header start -->
+                                <div class="page-header card">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-8">
+
+                                                   
+                                           {% if messages %}
+                                             {% for message in messages %}
+                                                <div class="alert alert-success" role="alert">
+                                                   {{ message }}
+                                                </div>
+                                             {% endfor %}
+                                            {% endif %}
+
+                                            <div class="page-header-title">
+                                                <i class="icofont icofont-file-code bg-c-blue"></i>
+                                                <div class="d-inline">
+                                                    <h4>creer un group</h4>
+                                                    <span>La gestions de vos factures commence par la creation du group</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="page-header-breadcrumb">
+                                                <ul class="breadcrumb-title">
+                                                    <li class="breadcrumb-item">
+                                                        <a href="index.html">
+                                                            <i class="icofont icofont-home"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">Accueil</a>
+                                                    </li>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Page-header end -->
+
+                               <!-- Page body start -->
+                               <div class="page-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        <!-- Input Alignment card start -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                   <h5>Creer un roups</h5>
+                                                   <span>    Veuillez remplir tous les champs ci-dessous pour créer un nouveau groupe. Assurez-vous que les informations sont correctes et complètes avant de soumettre.</span>
+                                                   <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
+                                                </div>
+                                                <hr>
+                                                <div class="card-block">
+                                                    <form method="post">
+                                                        {% csrf_token %}
+                                                        <div class="form-group row">
+                                                           <label class="col-sm-2 col-form-label">Noms</label>
+                                                               
+                                                            <div class="col-sm-10">
+                                                                {{ form.noms }}
+                                                                {% if form.noms.errors %}
+                                                                <div class="alert alert-danger">{{ form.noms.errors }}</div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Descriptions</label>
+                                                                
+                                                             <div class="col-sm-10">
+                                                                {{ form.description}}
+                                                                {% if form.description.errors %}
+                                                                   <div class="alert alert-danger">{{ form.description.errors }}</div>
+                                                                {% endif %}
+                                                             </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-10 offset-sm-2">
+                                                                <button type="submit" class="btn btn-primary">Creer</button>
+                                                            </div>
+                                                        </div>
+                                                                                
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- Input Alignment card end -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Page body end -->
+                            </div>
+                        </div>
+                        <div id="styleSelector">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    </div>
+                    <!-- Main-body end -->
+
+                    <div id="styleSelector">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

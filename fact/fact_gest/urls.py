@@ -9,6 +9,18 @@ urlpatterns = [
     # accueil user
     path('accueil_user',views.accuei_user,name='accueil-user'),
     
+    # group
+    path('group',views.voir_group,name='voir-group'),
+    
+    # creer group
+    path('creer_group',views.creer_group,name='creer-group'),
+    
+    # modifeir_group
+    path('modifier_group/<int:pk>/',views.modifier_group,name='modifier-group'),
+    
+    # supprimer group
+    path('supprimer_group/<int:pk>/',views.supprimer_group,name='supprimer-group'),
+    
     # entreprise
     path('entreprise',views.entreprise,name='entreprise'),
     

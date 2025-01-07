@@ -1,0 +1,146 @@
+{% extends 'navigateur/base.html' %}
+
+{% load static %}
+
+{% block title %}Grope{% endblock %}
+
+
+{% block fact %}
+
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+            <!-- menu verticale -->
+            {% include 'navigateur/nav1.html' %}
+
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                     <!-- menu verticale -->
+                    {% include 'navigateur/nav3.html' %}
+
+                    
+
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <div class="container mt-3">
+                                        {% if messages %}
+                                            {% for message in messages %}
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    {{ message }}
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    <!-- Page-header start -->
+                                    <div class="page-header card">
+                                        <div class="row align-items-end">
+                                            <div class="col-lg-8">
+                                                <div class="page-header-title">
+                                                    <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
+                                                    <div class="d-inline">
+                                                        <h4>gestion  des groupes ({{total_group}}) </h4>
+                                                        <span>"La gestion efficace de votre groupe commence par la création 
+                                                            d'une structure solide. 
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="page-header-breadcrumb">
+                                                    <ul class="breadcrumb-title">
+                                                        <li class="breadcrumb-item">
+                                                            <a href="index.html">
+                                                                <i class="icofont icofont-home"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="breadcrumb-item"><a href="{% url 'accueil-user' %}">Accueil</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item"><a href="{% url 'creer-group' %}">creer</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Page-header end -->
+
+                                    <div class="page-body">
+                                        <div class="row">
+                                            {% for group in groupes %}
+                                            <div class="col-sm-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>{{group.noms}}</h5>
+                                                        <span>Creer {{ group.date_creee|date:"d/m/Y" }}</span>
+                                                        <div class="card-header-right">
+                                                            <ul class="list-unstyled card-option" style="width: 35px;">
+                                                                <li class=""><i class="icofont icofont-simple-left"></i></li>
+                                                                <li><i class="icofont icofont-maximize full-card"></i></li>
+                                                                <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                                                <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                                                <li><i class="icofont icofont-error close-card"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <p>
+                                                            {{group.description}}
+                                                        </p>
+                                                        <div>
+                                                            <a href="{% url 'modifier-group' group.id %}" class="btn btn-primary btn-outline-primary btn-icon"><i class="ti-pencil"></i></a>
+                                                            <a href="{% url 'supprimer-group' group.id %}" class="btn btn-danger btn-outline-danger btn-icon"><i class="ti-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="styleSelector">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        </div>
+                        <!-- Main-body end -->
+
+                        <div id="styleSelector">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
