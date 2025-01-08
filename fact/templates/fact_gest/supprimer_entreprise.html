@@ -1,0 +1,23 @@
+{% extends 'navigateur/base.html' %}
+
+{% load static %}
+
+{% block title %}Supprimer entreprise{% endblock %}
+
+
+{% block fact %}
+
+
+<div class="container mt-4">
+    <h2>Confirmation de Suppression</h2>
+    <p>Êtes-vous sûr de vouloir supprimer le groupe : <strong>{{ company.noms }}</strong> ?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirmer la Suppression</button>
+        <a href="{% url 'detail-group' company.group.id %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+
+
+{% endblock %}

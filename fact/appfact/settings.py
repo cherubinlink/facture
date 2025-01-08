@@ -80,18 +80,15 @@ WSGI_APPLICATION = 'appfact.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'mysql_db': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'facture',
+        'NAME': 'factures',
         'USER': 'links',
         'PASSWORD': 'programmelink',
         'HOST': 'localhost',
-        'PORT': '3306',  # Port MySQL par défaut
+        'PORT': '3306',
     },
 }
+
 
 
 # Password validation

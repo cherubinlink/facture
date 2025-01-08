@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
-from fact_gest.forms import GroupForm
+from fact_gest.forms import GroupForm,CompanyForm
 from fact_gest.models import Group,Company
 
 
@@ -34,6 +34,7 @@ def voir_group(request):
     except Group.DoesNotExist:
         messages.error(request, 'Une erreur s’est produite. Aucun groupe trouvé.')
         return redirect('accueil')
+    
     groupes_entreprise = Group.objects.prefetch_related('companies').filter(proprietaire=user)
     total_group = groupes.count()
     context = {
@@ -42,6 +43,19 @@ def voir_group(request):
         'total_group':total_group
     }
     return render(request, 'fact_gest/group.html', context)
+
+
+# detail group
+def detail_group(request, group_id):
+    
+    group = get_object_or_404(Group, id=group_id)
+    entreprise = group.companies.all()
+    
+    context = {
+        'group':group,
+        'entreprise':entreprise
+    }
+    return render(request,'fact_gest/detail_group.html',context)
 
 
     
@@ -116,9 +130,89 @@ def supprimer_group(request, pk):
     }
     return render(request,'fact_gest/supprimer_group.html',context)
 
+
+
+
 # entreprise
 def entreprise(request):
     return render(request,'fact_gest/entreprise.html')
+
+
+# creer une entreprise
+def creer_entreprise(request):
+    
+    user = request.user
+    
+    if request.method == 'POST':
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            company = form.save(commit=False)
+            company.proprietaire = user
+            
+            group = Group.objects.filter(proprietaire=user).first()
+            if group:
+                company.group = group
+            
+            company.save()
+            messages.success(request,'votre entreprise a ete creer avec success')
+            return redirect('detail-group', group_id=company.group.id)
+        else:
+            messages.error(request, 'Veuillez corriger les erreurs ci-dessous.')
+    else:
+        form = CompanyForm()
+    context = {
+        'form':form
+    } 
+    return render(request,'fact_gest/creer_entreprise.html',context)
+
+
+# modification une entreprise
+def modifier_entreprise(request, pk):
+    # Récupération de l'entreprise ou renvoi d'une erreur 404
+    company = get_object_or_404(Company, id=pk)
+    
+    # Vérification que l'utilisateur est le propriétaire de l'entreprise
+    if company.proprietaire != request.user:
+        messages.error(request, "Vous n'avez pas les droits pour modifier cette entreprise.")
+        return redirect('voir-group')
+    
+    if request.method == 'POST':
+        form = CompanyForm(request.POST, instance=company)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Mise à jour réussie.')
+            return redirect('detail-group', group_id=company.group.id)
+    else:
+        form = CompanyForm(instance=company)
+    
+    context = {
+        'company': company,
+        'form': form
+    }
+    
+    return render(request, 'fact_gest/modifier_entreprise.html', context)
+
+# supprimer une entreprise
+def supprimer_entreprise(request, pk):
+    
+    # Récupération du groupe ou renvoi d'une erreur 404
+    company = get_object_or_404(Company, id=pk)
+    
+    # Vérification que l'utilisateur est le propriétaire du groupe
+    if company.proprietaire != request.user:
+        messages.error(request, "Vous n'avez pas les droits pour modifier ce groupe.")
+        return redirect('voir-group')
+    
+    if request.method == 'POST':
+        company.delete()
+        messages.success(request,'group supprimer avec success')
+        return redirect('detail-group', group_id=company.group.id)
+    context = {
+        'company':company
+    }
+    return render(request,'fact_gest/supprimer_entreprise.html',context)
+
+
 
 # produits
 def produit(request):

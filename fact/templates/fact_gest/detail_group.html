@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Grope{% endblock %}
+{% block title %}detail group{% endblock %}
 
 
 {% block fact %}
@@ -35,26 +35,24 @@
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                      <!-- menu verticale -->
-                    {% include 'navigateur/nav3.html' %}
+                    {% include 'navigateur/nav_ent.html' %}
 
                     
 
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
-
+                            {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                             <div class="main-body">
                                 <div class="page-wrapper">
-                                    <div class="container mt-3">
-                                        {% if messages %}
-                                            {% for message in messages %}
-                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                    {{ message }}
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                            {% endfor %}
-                                        {% endif %}
                                     <!-- Page-header start -->
                                     <div class="page-header card">
                                         <div class="row align-items-end">
@@ -62,10 +60,8 @@
                                                 <div class="page-header-title">
                                                     <i class="icofont icofont icofont icofont-file-document bg-c-pink"></i>
                                                     <div class="d-inline">
-                                                        <h4>gestion  des groupes ({{total_group}}) </h4>
-                                                        <span>"La gestion efficace de votre groupe commence par la création 
-                                                            d'une structure solide. 
-                                                        </span>
+                                                        <h4>{{group.noms}} </h4>
+                                                        <span>Assurer la gestion de vos entreprises </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,9 +73,9 @@
                                                                 <i class="icofont icofont-home"></i>
                                                             </a>
                                                         </li>
-                                                        <li class="breadcrumb-item"><a href="{% url 'accueil-user' %}">Accueil</a>
+                                                        <li class="breadcrumb-item"><a href="{% url 'voir-group' %}">Group</a>
                                                         </li>
-                                                        <li class="breadcrumb-item"><a href="{% url 'creer-group' %}">creer</a>
+                                                        <li class="breadcrumb-item"><a href="{% url 'creer-entreprise' %}">Creer</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -90,12 +86,12 @@
 
                                     <div class="page-body">
                                         <div class="row">
-                                            {% for group in groupes %}
+                                            {% for entr in entreprise %}
                                             <div class="col-sm-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h5>{{group.noms}}</h5>
-                                                        <span>Creer {{ group.date_creee|date:"d/m/Y" }}</span>
+                                                        <h5>{{entr.noms}}</h5>
+                                                        <span>{{entr.pays}}/ {{entr.ville}}</span>
                                                         <div class="card-header-right">
                                                             <ul class="list-unstyled card-option" style="width: 35px;">
                                                                 <li class=""><i class="icofont icofont-simple-left"></i></li>
@@ -108,16 +104,26 @@
                                                     </div>
                                                     <div class="card-block">
                                                         <p>
-                                                            {{group.description}}
+                                                           {{entr.description}}"<br>
+                                                            <b>
+                                                                Manager:
+                                                                {% if responsable %}
+                                                                {{entr.resposanble}}
+                                                                {% else %}
+                                                                pas de manager pour le monent
+                                                                {% endif %}
+                                                            </b>
                                                         </p>
                                                         <div>
-                                                            <a href="{% url 'modifier-group' group.id %}" class="btn btn-primary btn-outline-primary btn-icon"><i class="ti-pencil"></i></a>
-                                                            <a href="{% url 'supprimer-group' group.id %}" class="btn btn-danger btn-outline-danger btn-icon"><i class="ti-trash"></i></a>
-                                                            <a href="{% url 'detail-group' group.id %}" class="btn btn-success btn-outline-success btn-icon"><i class="ti-eye"></i></a>
+                                                            <a href="{% url 'modifier-entreprise' entr.id %}" class="btn btn-primary btn-outline-primary btn-icon"><i class="ti-pencil"></i></a>
+                                                            <a href="{% url 'supprimer-entreprise' entr.id %}" class="btn btn-danger btn-outline-danger btn-icon"><i class="ti-trash"></i></a>
+                                                            <a href="" class="btn btn-success btn-outline-success btn-icon"><i class="ti-eye"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% empty %}
+                                            <p>Aucune entreprise associée à ce groupe.</p>
                                             {% endfor %}
                                         </div>
                                     </div>

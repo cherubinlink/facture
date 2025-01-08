@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}creer group{% endblock %}
+{% block title %}creer une entreprise{% endblock %}
 
 
 {% block fact %}
@@ -61,8 +61,8 @@
                                             <div class="page-header-title">
                                                 <i class="icofont icofont-file-code bg-c-blue"></i>
                                                 <div class="d-inline">
-                                                    <h4>creer un group</h4>
-                                                    <span>La gestions de vos factures commence par la creation du group</span>
+                                                    <h4>creer un entreprise</h4>
+                                                    <span>La gestions de vos factures commence par la creation d'une entreprise</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -91,8 +91,8 @@
                                         <!-- Input Alignment card start -->
                                             <div class="card">
                                                 <div class="card-header">
-                                                   <h5>Creer un groups</h5>
-                                                   <span>    Veuillez remplir tous les champs ci-dessous pour créer un nouveau groupe. Assurez-vous que les informations sont correctes et complètes avant de soumettre.</span>
+                                                   <h5>Creer une entreprise</h5>
+                                                   <span>    Veuillez remplir tous les champs ci-dessous pour créer une novel entreprise. Assurez-vous que les informations sont correctes et complètes avant de soumettre.</span>
                                                    <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
                                                 </div>
                                                 <hr>
@@ -100,7 +100,7 @@
                                                     <form method="post">
                                                         {% csrf_token %}
                                                         <div class="form-group row">
-                                                           <label class="col-sm-2 col-form-label">Noms</label>
+                                                           <label class="col-sm-2 col-form-label">Noms entreprise</label>
                                                                
                                                             <div class="col-sm-10">
                                                                 {{ form.noms }}
@@ -109,6 +109,38 @@
                                                                 {% endif %}
                                                             </div>
                                                         </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Adresse entreprise</label>
+                                                                
+                                                             <div class="col-sm-10">
+                                                                 {{ form.adresse }}
+                                                                 {% if form.adresse.errors %}
+                                                                 <div class="alert alert-danger">{{ form.adresse.errors }}</div>
+                                                                 {% endif %}
+                                                             </div>
+                                                         </div>
+                                                         <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Pays entreprise</label>
+                                                                
+                                                             <div class="col-sm-10">
+                                                                 {{ form.pays }}
+                                                                 {% if form.pays.errors %}
+                                                                 <div class="alert alert-danger">{{ form.pays.errors }}</div>
+                                                                 {% endif %}
+                                                             </div>
+                                                         </div>
+                                                         <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Ville entreprise</label>
+                                                                
+                                                             <div class="col-sm-10">
+                                                                 {{ form.ville }}
+                                                                 {% if form.ville.errors %}
+                                                                 <div class="alert alert-danger">{{ form.ville.errors }}</div>
+                                                                 {% endif %}
+                                                             </div>
+                                                         </div>
+                                                         
+
                                                         <div class="form-group row">
                                                             <label class="col-sm-2 col-form-label">Descriptions</label>
                                                                 

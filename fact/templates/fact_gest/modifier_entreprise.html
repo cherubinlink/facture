@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}creer group{% endblock %}
+{% block title %}modifier entreprise{% endblock %}
 
 
 {% block fact %}
@@ -48,20 +48,19 @@
                                 <div class="page-header card">
                                     <div class="row align-items-end">
                                         <div class="col-lg-8">
-
-                                                   
-                                           {% if messages %}
-                                             {% for message in messages %}
-                                                <div class="alert alert-success" role="alert">
-                                                   {{ message }}
-                                                </div>
-                                             {% endfor %}
-                                            {% endif %}
+                                            
+                                        {% if messages %}
+                                          {% for message in messages %}
+                                            <div class="alert alert-success" role="alert">
+                                                {{ message }}
+                                            </div>
+                                           {% endfor %}
+                                        {% endif %}
 
                                             <div class="page-header-title">
                                                 <i class="icofont icofont-file-code bg-c-blue"></i>
                                                 <div class="d-inline">
-                                                    <h4>creer un group</h4>
+                                                    <h4>modifier entreprise</h4>
                                                     <span>La gestions de vos factures commence par la creation du group</span>
                                                 </div>
                                             </div>
@@ -91,8 +90,8 @@
                                         <!-- Input Alignment card start -->
                                             <div class="card">
                                                 <div class="card-header">
-                                                   <h5>Creer un groups</h5>
-                                                   <span>    Veuillez remplir tous les champs ci-dessous pour créer un nouveau groupe. Assurez-vous que les informations sont correctes et complètes avant de soumettre.</span>
+                                                   <h5>modifier une  entreprise</h5>
+                                                   <span>    Veuillez remplir tous les champs ci-dessous pour modifier un nouveau groupe. Assurez-vous que les informations sont correctes et complètes avant de soumettre.</span>
                                                    <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
                                                 </div>
                                                 <hr>
@@ -100,28 +99,50 @@
                                                     <form method="post">
                                                         {% csrf_token %}
                                                         <div class="form-group row">
-                                                           <label class="col-sm-2 col-form-label">Noms</label>
+                                                            <label class="col-sm-2 col-form-label"> Noms</label>
                                                                
                                                             <div class="col-sm-10">
-                                                                {{ form.noms }}
-                                                                {% if form.noms.errors %}
-                                                                <div class="alert alert-danger">{{ form.noms.errors }}</div>
-                                                                {% endif %}
+                                                            {{form.noms}}
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label class="col-sm-2 col-form-label">Descriptions</label>
+                                                            <label class="col-sm-2 col-form-label"> Adreese</label>
+                                                               
+                                                            <div class="col-sm-10">
+                                                            {{form.adresse}}
                                                                 
-                                                             <div class="col-sm-10">
-                                                                {{ form.description}}
-                                                                {% if form.description.errors %}
-                                                                   <div class="alert alert-danger">{{ form.description.errors }}</div>
-                                                                {% endif %}
-                                                             </div>
+                                                            </div>
                                                         </div>
                                                         <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label"> Pays</label>
+                                                               
+                                                            <div class="col-sm-10">
+                                                            {{form.pays}}
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label"> Ville</label>
+                                                               
+                                                            <div class="col-sm-10">
+                                                            {{form.ville}}
+                                                                
+                                                            </div>
+                                                        </div>
+                                                       
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Descriptions</label>
+                                                               
+                                                            <div class="col-sm-10">
+                                                            {{form.description}}
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row">
                                                             <div class="col-sm-10 offset-sm-2">
-                                                                <button type="submit" class="btn btn-primary">Creer</button>
+                                                                <button type="submit" class="btn btn-primary">Suvegarder</button>
                                                             </div>
                                                         </div>
                                                                                 

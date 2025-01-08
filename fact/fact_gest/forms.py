@@ -1,5 +1,5 @@
 from django import forms
-from fact_gest.models import Group
+from fact_gest.models import Group,Company
 
 
 
@@ -27,3 +27,33 @@ class GroupForm(forms.ModelForm):
                 raise forms.ValidationError("Un groupe existe déjà avec ce nom.")
         
         return noms
+    
+
+class CompanyForm(forms.ModelForm):
+    
+    class Meta:
+        model = Company
+        fields = ['noms', 'adresse', 'pays', 'ville', 'description']
+        exclude = ['proprietaire', 'groupe', 'responsable']
+        widgets = {
+            'noms': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Nom de l\'entreprise'
+            }),
+            'adresse': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Adresse'
+            }),
+            'pays': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Nom du pays'
+            }),
+            'ville': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Nom de la ville'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Description de l entreprise (facultatif)'
+            }),
+        }

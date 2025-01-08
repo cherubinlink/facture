@@ -12,6 +12,9 @@ urlpatterns = [
     # group
     path('group',views.voir_group,name='voir-group'),
     
+    # detail group
+    path('detail_group/<int:group_id>/',views.detail_group,name='detail-group'),
+    
     # creer group
     path('creer_group',views.creer_group,name='creer-group'),
     
@@ -23,6 +26,15 @@ urlpatterns = [
     
     # entreprise
     path('entreprise',views.entreprise,name='entreprise'),
+    
+    # creer une entreprise
+    path('creer_entreprise/',views.creer_entreprise,name='creer-entreprise'),
+    
+    # modifier entreprise
+    path('modifier_entreprise/<int:pk>/',views.modifier_entreprise,name='modifier-entreprise'),
+    
+    # supprimer entreprise
+    path('supprimer_entreprise/<int:pk>/',views.supprimer_entreprise,name='supprimer-entreprise'),
     
     # produit
     path('produit',views.produit,name='produit'),
