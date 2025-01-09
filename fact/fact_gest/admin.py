@@ -32,3 +32,7 @@ admin.site.register(FactureProduit,FactureproduitAdmin)
 class FactureserviceAdmin(admin.ModelAdmin):
     list_display = ['facture','service','date_debut','date_fin']
 admin.site.register(FactureService,FactureserviceAdmin)
+
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ['noms','email','adresse','telephone','company']
+admin.site.register(Client, ClientAdmin)

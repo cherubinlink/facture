@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
-from fact_gest.forms import GroupForm,CompanyForm
-from fact_gest.models import Group,Company
+from fact_gest.forms import GroupForm,CompanyForm,ClientForm
+from fact_gest.models import Group,Company,Produit,Client,Facture,Service
+import logging
 
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -50,10 +52,13 @@ def detail_group(request, group_id):
     
     group = get_object_or_404(Group, id=group_id)
     entreprise = group.companies.all()
+    groupes_entreprise = Group.objects.prefetch_related('companies').filter(proprietaire=request.user)
+    
     
     context = {
         'group':group,
-        'entreprise':entreprise
+        'entreprise':entreprise,
+        'groupes_entreprise':groupes_entreprise
     }
     return render(request,'fact_gest/detail_group.html',context)
 
@@ -134,8 +139,23 @@ def supprimer_group(request, pk):
 
 
 # entreprise
-def entreprise(request):
-    return render(request,'fact_gest/entreprise.html')
+def entreprise(request, pk):
+    user = request.user
+    entreprise = get_object_or_404(Company, id=pk)
+    
+    clients = Client.objects.filter(company=entreprise)
+    produits = Produit.objects.filter(company=entreprise)
+    services = Service.objects.filter(company=entreprise)
+    factures = Facture.objects.filter(company=entreprise)    
+    context = {
+        'user':user,
+        'entreprise':entreprise,
+        'clients':clients,
+        'produits':produits,
+        'services':services,
+        'factures':factures
+    }
+    return render(request,'fact_gest/entreprise.html',context)
 
 
 # creer une entreprise
@@ -224,8 +244,98 @@ def service(request):
 
 
 # clients
-def client(request):
-    return render(request,'fact_gest/client.html')
+def client(request, entreprise_id):
+    
+    entreprise = get_object_or_404(Company, id=entreprise_id)
+    
+    clients = Client.objects.filter(company=entreprise).order_by('-id')
+    client_count = clients.count()
+    
+    context = {
+        'entreprise':entreprise,
+        'clients':clients,
+        'client_count': client_count
+    }
+    return render(request,'fact_gest/client.html',context)
+
+# ajouter un client
+def ajouter_client(request, entreprise_id):
+    
+    company = get_object_or_404(Company, id=entreprise_id)
+    
+    if request.method == 'POST':
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            client = form.save(commit=False)
+            client.company = company
+            client.save()
+            
+            messages.success(request, 'client ajouter avec success')
+            return redirect('client', entreprise_id=entreprise_id)
+        else:
+            messages.error(request, 'verifier vos information avant de soumetre')
+    else:
+        form = ClientForm()
+    context = {
+        'company':company,
+        'form':form
+    }
+    return render(request,'fact_gest/ajouter_client.html',context)
+
+# modifier un client
+def modifier_client(request, client_id):
+    client = get_object_or_404(Client, id=client_id)
+    logger.info(f"Client récupéré : {client.noms}")
+
+    if request.method == 'POST':
+        logger.info("Requête POST détectée.")
+        form = ClientForm(request.POST, instance=client)
+        if form.is_valid():
+            logger.info("Formulaire valide.")
+            form.save()
+            messages.success(request, 'Mise à jour réussie avec succès.')
+            return redirect('client', entreprise_id=client.company.id)
+        else:
+            logger.warning("Formulaire invalide.")
+            logger.warning(form.errors)  # Affiche les erreurs du formulaire dans les journaux
+            messages.error(request, 'Veuillez vérifier vos informations avant de soumettre.')
+    else:
+        form = ClientForm(instance=client)
+
+    context = {
+        'form': form,
+        'client': client
+    }
+    return render(request, 'fact_gest/modifier_client.html', context)
+
+# suppresion des clients
+def supprimer_clients(request, entreprise_id):
+    # Récupérer l'entreprise concernée
+    entreprise = get_object_or_404(Company, id=entreprise_id)
+
+    if request.method == 'POST':
+        client_ids = request.POST.getlist('clients')  # Récupère les IDs des clients à supprimer
+        if client_ids:
+            # Supprime les clients qui appartiennent à l'entreprise spécifiée
+            Client.objects.filter(id__in=client_ids, company=entreprise).delete()
+            messages.success(request, 'Clients supprimés avec succès!')
+        else:
+            messages.warning(request, 'Aucun client sélectionné.')
+
+        return redirect('client', entreprise_id=entreprise_id)  # Redirige vers la page de clients
+
+    # Récupérer les clients de l'entreprise spécifiée pour l'affichage
+    clients = Client.objects.filter(company=entreprise).order_by('-id')
+    client_count = clients.count()
+
+    context = {
+        'entreprise': entreprise,
+        'clients': clients,
+        'client_count': client_count
+    }
+    return render(request, 'fact_gest/supprimer_clients.html', context)
+    
+    
 
 # facture
 def facture(request):

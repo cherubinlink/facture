@@ -36,9 +36,9 @@
         <ul class="pcoded-item pcoded-left-item">
 
             <li class="">
-                <a href="{% url 'entreprise' %}">
+                <a href="{% url 'entreprise' entreprise.id %}">
                     <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>E</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Entreprise</span>
+                    <span class="pcoded-mtext text-capitalizer" data-i18n="nav.dash.main">{{entreprise.noms}}</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
@@ -54,7 +54,7 @@
         <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Clients &amp; S A V</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>
-                <a href="{% url 'client' %}">
+                <a href="{% url 'client' entreprise.id %}">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>C</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Clients</span>
                     <span class="pcoded-mcaret"></span>

@@ -1,0 +1,21 @@
+{% extends 'navigateur/base.html' %}
+
+{% load static %}
+
+{% block title %}Confirmer la Suppression{% endblock %}
+
+{% block fact %}
+
+<div class="container mt-4">
+    <h2>Confirmation de Suppression</h2>
+    <p>Êtes-vous sûr de vouloir supprimer ces clients : <strong>{{ entreprise.noms }}</strong> ?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="clients" value="{{ client_ids|join:',' }}">
+        <button type="submit" class="btn btn-danger">Confirmer la Suppression</button>
+        <a href="{% url 'client' entreprise.id %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+
+{% endblock %}

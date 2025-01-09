@@ -25,7 +25,7 @@ urlpatterns = [
     path('supprimer_group/<int:pk>/',views.supprimer_group,name='supprimer-group'),
     
     # entreprise
-    path('entreprise',views.entreprise,name='entreprise'),
+    path('entreprise/<int:pk>/',views.entreprise,name='entreprise'),
     
     # creer une entreprise
     path('creer_entreprise/',views.creer_entreprise,name='creer-entreprise'),
@@ -43,7 +43,16 @@ urlpatterns = [
     path('services',views.service,name='service'),
     
     # client
-    path('client',views.client,name='client'),
+    path('client/<int:entreprise_id>/',views.client,name='client'),
+    
+    # ajouter un client
+    path('ajouter_client/<int:entreprise_id>/clients/ajouter/',views.ajouter_client,name='ajouter-client'),
+    
+    # modifier un client
+    path('modifier_client/<int:client_id>/',views.modifier_client,name='modifier-client'),
+    
+    # supprimer client
+    path('entreprise/<int:entreprise_id>/supprimer_clients/', views.supprimer_clients, name='supprimer_clients'),
     
     # facture
     path('facture',views.facture,name='facture'),

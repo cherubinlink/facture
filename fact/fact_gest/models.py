@@ -11,6 +11,7 @@ STATUS_CHOICES = (
     ('Envoye','Envoye'),
     ('Paye','Paye'),
     ('En attente','En attente'),
+    ('Avance','Avance'),
     ('Annule','Annuler')
 )
 

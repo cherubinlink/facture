@@ -1,5 +1,5 @@
 from django import forms
-from fact_gest.models import Group,Company
+from fact_gest.models import Group,Company,Client
 
 
 
@@ -57,3 +57,35 @@ class CompanyForm(forms.ModelForm):
                 'placeholder': 'Description de l entreprise (facultatif)'
             }),
         }
+        
+class ClientForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = ['noms','email','adresse','telephone']
+        widgets = {
+            'noms': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Nom'
+            }),
+              'email': forms.EmailInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'email'
+            }),
+            'adresse': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Adresse'
+            }),
+            'telephone': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'telephone'
+            }),
+          
+        }
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email:
+            qs = Client.objects.filter(email=email).exclude(id=self.instance.id)  # Exclure l'instance actuelle
+            if qs.exists():
+                raise forms.ValidationError("Un client avec cet email existe déjà.")
+        return email

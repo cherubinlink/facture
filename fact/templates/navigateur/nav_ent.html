@@ -7,8 +7,8 @@
             <div class="main-menu-header">
                 <img class="img-40 img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="User-Profile-Image">
                 <div class="user-details">
-                    <span>John Doe</span>
-                    <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
+                    <span>{{request.user}}</span>
+                    <span id="more-details">{{request.user.role}}<i class="ti-angle-down"></i></span>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
                     <li class="active">
                         <a href="">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">{{group.noms}}</span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">{{group.entreprise.noms}}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
@@ -62,7 +62,7 @@
                     <li class=" ">
                         <a href="">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">{{ entreprise.noms }}</span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">{{ group.entreprise.noms }}</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
