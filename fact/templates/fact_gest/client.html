@@ -40,13 +40,16 @@
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
                              <!-- menu rechercre -->
+                             <form method="GET" action="{% url 'client' entreprise.id %}">
                             <div class="pcoded-search">
                                 <span class="searchbar-toggle">  </span>
                                 <div class="pcoded-search-box ">
-                                    <input type="text" placeholder="Recherche du client">
-                                    <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
+                                    <input type="text" name="search" placeholder="Rechercher par nom" value="{{ search_query }}">
+                                    <button type="submit" class="search-icon"><i class="ti-search" aria-hidden="true"></i></button>
+                                    
                                 </div>
                             </div>
+                        </form>
 
                             {% if messages %}
                             {% for message in messages %}
@@ -69,7 +72,7 @@
                                                 <div class="page-header-title">
                                                     <i class="icofont icofont-table bg-c-blue"></i>
                                                     <div class="d-inline">
-                                                        <h4>Gestions client</h4>
+                                                        <h4>Gestions client ({{entreprise.noms}})</h4>
                                                         <span>le numero de telephone ou email est important pour un service apres vente </span>
                                                     </div>
                                                 </div>

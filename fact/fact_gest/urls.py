@@ -37,7 +37,16 @@ urlpatterns = [
     path('supprimer_entreprise/<int:pk>/',views.supprimer_entreprise,name='supprimer-entreprise'),
     
     # produit
-    path('produit',views.produit,name='produit'),
+    path('produit/<int:entreprise_id>/',views.produit,name='produit'),
+    
+    # ajouter produit
+    path('ajouter_produit/<int:entreprise_id>/produit/ajouter/',views.ajouter_produit,name='ajouter-produit'),
+    
+    # modifier produit
+    path('modifier_produit/<int:produit_id>/',views.modifier_produit,name='modifier-produit'),
+    
+    # supprimer produit
+    path('entreprise/<int:entreprise_id>/supprimer_produit/', views.supprimer_produit, name='supprimer_produit'),
     
     # services
     path('services',views.service,name='service'),

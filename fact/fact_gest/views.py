@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
-from fact_gest.forms import GroupForm,CompanyForm,ClientForm
+from fact_gest.forms import GroupForm,CompanyForm,ClientForm,ProduitForm
 from fact_gest.models import Group,Company,Produit,Client,Facture,Service
 import logging
 
@@ -235,8 +235,102 @@ def supprimer_entreprise(request, pk):
 
 
 # produits
-def produit(request):
-    return render(request,'fact_gest/produit.html')
+def produit(request, entreprise_id):
+    
+    entreprise = get_object_or_404(Company, id=entreprise_id)
+    
+    seaech_query = request.GET.get('search', '').strip()
+    
+    if seaech_query:
+        produits = Produit.objects.filter(company=entreprise, noms__icontains=seaech_query).order_by('-id')
+    else:
+        produits = Produit.objects.filter(company=entreprise).order_by('-id')
+    
+    produit_count = produits.count()
+    
+    context = {
+        'entreprise':entreprise,
+        'produits':produits,
+        'produit_count':produit_count
+    }
+    return render(request,'fact_gest/produit.html',context)
+
+# ajouter produit
+def ajouter_produit(request, entreprise_id):
+    
+    company = get_object_or_404(Company, id=entreprise_id)
+    
+    if request.method == 'POST':
+        form = ProduitForm(request.POST)
+        if form.is_valid():
+            produit = form.save(commit=False)
+            produit.company = company
+            produit.save()
+            
+            messages.success(request,'produit ajouter avec success')
+            return redirect('produit', entreprise_id=entreprise_id)
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+    else:
+        form = ProduitForm()
+    context = {
+        'company':company,
+        'form':form
+    }
+    return render(request,'fact_gest/ajouter_produit.html',context)
+
+# modifier produit
+def modifier_produit(request, produit_id):
+    
+    produit = get_object_or_404(Produit, id=produit_id)
+    logger.info(f"produit recupere : {produit.noms}")
+    
+    if request.method == 'POST':
+        logger.info("requete POST detectee")
+        form = ProduitForm(request.POST, instance=produit)
+        if form.is_valid():
+            logger.info("formulaire valide")
+            form.save()
+            messages.success(request, 'Mise à jour réussie avec succès.')
+            return redirect('produit', entreprise_id=produit.company.id)
+        else:
+            logger.warning("Formulaire invalide.")
+            logger.warning(form.errors)  # Affiche les erreurs du formulaire dans les journaux
+            messages.error(request, 'Veuillez vérifier vos informations avant de soumettre.')
+    else:
+        form = ProduitForm(instance=produit)
+    context = {
+        'form':form,
+        'produit':produit
+    }
+    return render(request,'fact_gest/modifier_produit.html',context)
+
+# supprimer produit
+def supprimer_produit(request, entreprise_id):
+    
+    entreprise = get_object_or_404(Company, id=entreprise_id)
+    
+    if request.method == 'POST':
+        produit_ids = request.POST.getlist('produits')
+        if produit_ids:
+            Produit.objects.filter(id__in=produit_ids, company=entreprise).delete()
+            messages.success(request, 'produit supprimés avec succès!')
+        else:
+            messages.warning(request, 'Aucun produit sélectionné.')
+
+        return redirect('produit', entreprise_id=entreprise_id)  # Redirige vers la page de clients
+        # Récupérer les clients de l'entreprise spécifiée pour l'affichage
+    produits = Client.objects.filter(company=entreprise).order_by('-id')
+    produit_count = produits.count()
+
+    context = {
+        'entreprise': entreprise,
+        'produits': produits,
+        'produit_count': produit_count
+    }
+    return render(request, 'fact_gest/supprimer_produit.html', context)
 
 # services
 def service(request):
@@ -248,13 +342,23 @@ def client(request, entreprise_id):
     
     entreprise = get_object_or_404(Company, id=entreprise_id)
     
-    clients = Client.objects.filter(company=entreprise).order_by('-id')
+    # Récupérer le paramètre de recherche de la requête
+    search_query = request.GET.get('search', '').strip()
+
+    # Filtrer les clients en fonction de la recherche
+    if search_query:
+        clients = Client.objects.filter(company=entreprise, noms__icontains=search_query).order_by('-id')
+    else:
+        clients = Client.objects.filter(company=entreprise).order_by('-id')
+    
+   
     client_count = clients.count()
     
     context = {
         'entreprise':entreprise,
         'clients':clients,
-        'client_count': client_count
+        'client_count': client_count,
+        'search_query': search_query,
     }
     return render(request,'fact_gest/client.html',context)
 
@@ -273,7 +377,10 @@ def ajouter_client(request, entreprise_id):
             messages.success(request, 'client ajouter avec success')
             return redirect('client', entreprise_id=entreprise_id)
         else:
-            messages.error(request, 'verifier vos information avant de soumetre')
+            # Afficher les erreurs de validation
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     else:
         form = ClientForm()
     context = {
@@ -334,6 +441,10 @@ def supprimer_clients(request, entreprise_id):
         'client_count': client_count
     }
     return render(request, 'fact_gest/supprimer_clients.html', context)
+
+# detail client
+def detail_client(request):
+    return render(request, 'fact_gest/detail_client.html')
     
     
 

@@ -1,5 +1,5 @@
 from django import forms
-from fact_gest.models import Group,Company,Client
+from fact_gest.models import Group,Company,Client,Produit
 
 
 
@@ -84,8 +84,39 @@ class ClientForm(forms.ModelForm):
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if email:
-            qs = Client.objects.filter(email=email).exclude(id=self.instance.id)  # Exclure l'instance actuelle
+        company = self.cleaned_data.get('company')  # Récupérer l'entreprise
+        
+        if email and company:
+            qs = Client.objects.filter(email=email, company=company)
+            if self.instance and self.instance.pk:
+                qs = qs.exclude(pk=self.instance.pk)
             if qs.exists():
-                raise forms.ValidationError("Un client avec cet email existe déjà.")
+                raise forms.ValidationError("Cet email est déjà utilisé pour un autre client de cette entreprise.")
+        
         return email
+
+class ProduitForm(forms.ModelForm):
+    
+    class Meta:
+        model = Produit
+        fields = ['noms','prix_achat','prix_vente','stock']
+        widgets = {
+            'noms': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Nom'
+            }),
+            'prix_achat': forms.NumberInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'prix d/achat'
+            }),
+            'prix_vente': forms.NumberInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'prix vente'
+            }),
+            'stock': forms.NumberInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'stock'
+            }),
+        }
+
+    

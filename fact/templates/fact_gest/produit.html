@@ -40,13 +40,25 @@
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
                              <!-- menu rechercre -->
+                             <form method="GET" action="{% url 'produit' entreprise.id %}">
                             <div class="pcoded-search">
                                 <span class="searchbar-toggle">  </span>
                                 <div class="pcoded-search-box ">
-                                    <input type="text" placeholder="Recherche un produit">
-                                    <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
+                                    <input type="text" name="search" placeholder="Rechercher par nom" value="{{ search_query }}">
+                                    <button type="submit" class="search-icon"><i class="ti-search" aria-hidden="true"></i></button>
                                 </div>
                             </div>
+                        </form>
+                            {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
 
                             <!-- Main-body start -->
                             <div class="main-body">
@@ -58,7 +70,7 @@
                                                 <div class="page-header-title">
                                                     <i class="icofont icofont-table bg-c-blue"></i>
                                                     <div class="d-inline">
-                                                        <h4>Gestions Produits</h4>
+                                                        <h4>Gestions Produits ({{entreprise.noms}})</h4>
                                                         <span>bien definir le prix d'achat et vente pour conaitre le revenue de chaque produits </span>
                                                     </div>
                                                 </div>
@@ -73,7 +85,7 @@
                                                     </li>
                                                     <li class="breadcrumb-item"><a href="{% url 'accueil-user' %}">Accueil</a>
                                                     </li>
-                                                    <li class="breadcrumb-item"><a href="#!">Ajouter</a>
+                                                    <li class="breadcrumb-item"><a href="{% url 'ajouter-produit' entreprise_id=entreprise.id %}">Ajouter</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -85,11 +97,13 @@
                                 <!-- Page-body start -->
                                 <div class="page-body">
                                     <!-- Basic table card start -->
+                                    <form method="post" action="{% url 'supprimer_produit' entreprise.id %}" onsubmit="return confirmDelete();">
+                                        {% csrf_token %}
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Total Produits</h5>
+                                            <h5>{{produit_count}} Produit{% if produit_count != 0 and produit_count != 1 %}s {% endif %}</h5>
                                             <span>
-                                                <button class="btn btn-danger"><i class="ti-trash"></i>Supprimer selectionner</button>
+                                                <button type="submit" class="btn btn-danger"><i class="ti-trash"></i>Supprimer selectionner</button>
                                             </span>
                                             <div class="card-header-right">    <ul class="list-unstyled card-option">        <li><i class="icofont icofont-simple-left "></i></li>        <li><i class="icofont icofont-maximize full-card"></i></li>        <li><i class="icofont icofont-minus minimize-card"></i></li>        <li><i class="icofont icofont-refresh reload-card"></i></li>        <li><i class="icofont icofont-error close-card"></i></li>    </ul></div>
                                         </div>
@@ -107,27 +121,34 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {% if produits %}
+                                                        {% for produit in produits %}
                                                         <tr>
                                                             <th scope="row">
-                                                                <input type="checkbox" id="">
+                                                                <input type="checkbox" name="produits" value="{{ produit.id }}">
                                                             </th>
-                                                            <td>Mark</td>
-                                                            <td>Otto</td>
-                                                            <td>@mdo</td>
-                                                            <td>@mdo</td>
+                                                            <td>{{produit.noms}}</td>
+                                                            <td>{{produit.prix_achat}}</td>
+                                                            <td>{{produit.prix_vente}}</td>
+                                                            <td>{{produit.stock}}</td>
                                                             <td>
                                                                
-                                                                <a href="" class="btn btn-primary btn-outline-primary btn-icon"><i class="ti-pencil"></i></a>
+                                                                <a href="{% url 'modifier-produit' produit.id %}" class="btn btn-primary btn-outline-primary btn-icon"><i class="ti-pencil"></i></a>
                                                                 <a href="" class="btn btn-success btn-outline-success btn-icon"><i class="icofont icofont-eye"></i></a>
                                                                
                                                             </td>
                                                         </tr>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                        <p>Aucun produits eregistrer pour votre entreprise </p>
+                                                        {% endif %}
                                                         
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
+                                </form>
                                     <!-- Basic table card end -->
                                 </div>
                                 <!-- Page-body end -->
