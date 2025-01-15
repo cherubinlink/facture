@@ -1,5 +1,5 @@
 from django.contrib import admin
-from fact_gest.models import Group,Company,Client,Produit,Service,Facture,FactureProduit,FactureService
+from fact_gest.models import Group,Company,Client,Produit,Service,Facture,FactureProduit
 
 # Register your models here.
 
@@ -18,7 +18,7 @@ class ProduitAdmin(admin.ModelAdmin):
 admin.site.register(Produit,ProduitAdmin)
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['company','noms','description','tarif']
+    list_display = ['company','noms','description','actif']
 admin.site.register(Service,ServiceAdmin)
 
 class FactureAdmin(admin.ModelAdmin):
@@ -29,9 +29,7 @@ class FactureproduitAdmin(admin.ModelAdmin):
     list_display = ['facture','produit','quantite']
 admin.site.register(FactureProduit,FactureproduitAdmin)
 
-class FactureserviceAdmin(admin.ModelAdmin):
-    list_display = ['facture','service','date_debut','date_fin']
-admin.site.register(FactureService,FactureserviceAdmin)
+
 
 class ClientAdmin(admin.ModelAdmin):
     list_display = ['noms','email','adresse','telephone','company']
