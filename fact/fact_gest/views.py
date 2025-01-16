@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
-from fact_gest.forms import GroupForm,CompanyForm,ClientForm,ProduitForm
+from fact_gest.forms import GroupForm,CompanyForm,ClientForm,ProduitForm,ServiceForm
 from fact_gest.models import Group,Company,Produit,Client,Facture,Service
 import logging
 
@@ -14,7 +14,14 @@ def accueil(request):
 
 # accueil utiliateur 
 def accuei_user(request):
-    return render(request,'fact_gest/accueil_user.html')
+    user = request.user
+
+    group = Group.objects.get(proprietaire=user)
+    
+    context = {
+        
+    } 
+    return render(request,'fact_gest/accueil_user.html',context)
 
 
 # voir les informations du group
@@ -333,8 +340,99 @@ def supprimer_produit(request, entreprise_id):
     return render(request, 'fact_gest/supprimer_produit.html', context)
 
 # services
-def service(request):
-    return render(request,'fact_gest/service.html')
+def service(request, entreprise_id):
+    
+    entreprise = get_object_or_404(Company, id=entreprise_id)
+    search_query = request.GET.get('search', '').strip()
+    
+    if search_query:
+        services = Service.objects.filter(company=entreprise, noms__icontains=search_query).order_by('-id')
+    else:
+        services = Service.objects.filter(company=entreprise).order_by('-id')
+    service_count = services.count()
+    
+    context = {
+        'entreprise':entreprise,
+        'services':services,
+        'service_count':service_count,
+        'search_query':search_query
+    }
+    return render(request,'fact_gest/service.html',context)
+
+# ajouter un service
+def ajouter_service(request, entreprise_id):
+    
+    company = get_object_or_404(Company, id=entreprise_id)
+    
+    if request.method == 'POST':
+        form = ServiceForm(request.POST)
+        if form.is_valid():
+            service = form.save(commit=False)
+            service.company = company
+            service.save()
+
+            messages.success(request,'votre service a ete ajouter avec success')
+            return redirect('service', entreprise_id=entreprise_id)
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}:{error}")
+    else:
+        form = ServiceForm()
+    context = {
+        'company':company,
+        'form':form
+    }
+    return render(request,'fact_gest/ajouter_service.html',context)
+
+# modifier un service
+def modifier_service(request, service_id):
+    
+    service = get_object_or_404(Service, id=service_id)
+    logger.info(f"service recuperer: {service.noms}")
+    
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, instance=service)
+        if form.is_valid():
+            logger.info("formulaire valide")
+            form.save()
+            messages.success(request,'mise a jour reussir avec success')
+            return redirect('service', entreprise_id=service.company.id)
+        else:
+            logger.warning("formulaire invalide")
+            logger.warning(form.errors)
+            messages.error(request,'veillez a remplir les informations avant de soumetre')
+    else:
+        form = ServiceForm(instance=service)
+    context = {
+        'form':form,
+        'service':service
+    }
+    return render(request,'fact_gest/modifier_service.html',context)
+
+# supprimer un ou plusieurs service
+def supprimer_service(request, entreprise_id):
+    
+    entreprise = get_object_or_404(Company, id=entreprise_id)
+    
+    if request.method == 'POST':
+        service_ids = request.POST.getlist('services')
+        if service_ids:
+            Service.objects.filter(id__in=service_ids, company=entreprise).delete()
+            messages.success(request,'service supprimer avec succes')
+        else:
+            messages.warning(request,'aucun service selectionner')
+        return redirect('service', entreprise_id=entreprise_id)
+    
+    services = Service.objects.filter(company=entreprise).order_by('-id')
+    service_count = services.count()
+    
+    context = {
+        'entreprise':entreprise,
+        'service':service,
+        'service_count':service_count
+    }
+    return render(request,'fact_gest/supprimer_service.html',context)
 
 
 # clients

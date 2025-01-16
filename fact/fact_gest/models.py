@@ -97,7 +97,8 @@ class Service(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='services')
     noms = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
-    actif = models.BooleanField(default=True)  # Statut du service
+    actif = models.BooleanField(default=True)
+ 
 
     class Meta:
         verbose_name = 'service'

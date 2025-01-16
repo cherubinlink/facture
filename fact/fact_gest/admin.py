@@ -18,7 +18,7 @@ class ProduitAdmin(admin.ModelAdmin):
 admin.site.register(Produit,ProduitAdmin)
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['company','noms','description','actif']
+    list_display = ['company','noms','description']
 admin.site.register(Service,ServiceAdmin)
 
 class FactureAdmin(admin.ModelAdmin):

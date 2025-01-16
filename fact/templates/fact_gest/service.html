@@ -43,10 +43,20 @@
                             <div class="pcoded-search">
                                 <span class="searchbar-toggle">  </span>
                                 <div class="pcoded-search-box ">
-                                    <input type="text" placeholder="Recherche un services">
-                                    <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
+                                    <input type="text" name="search" placeholder="Rechercher par nom" value="{{ search_query }}">
+                                    <button type="submit" class="search-icon"><i class="ti-search" aria-hidden="true"></i></button>
                                 </div>
                             </div>
+                            {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
 
                             <!-- Main-body start -->
                             <div class="main-body">
@@ -73,7 +83,7 @@
                                                     </li>
                                                     <li class="breadcrumb-item"><a href="{% url 'accueil-user' %}">Accueil</a>
                                                     </li>
-                                                    <li class="breadcrumb-item"><a href="#!">Ajouter</a>
+                                                    <li class="breadcrumb-item"><a href="{% url 'ajouter-service' entreprise_id=entreprise.id %}">Ajouter</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -85,11 +95,13 @@
                                 <!-- Page-body start -->
                                 <div class="page-body">
                                     <!-- Basic table card start -->
+                                    <form method="post" action="{% url 'supprimer-service' entreprise.id %}" onsubmit="return confirmDelete();">
+                                        {% csrf_token %}
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Total services</h5>
+                                            <h5>{{ service_count}} service{% if service_count != 1 and service_count != 0 %}s {% endif %}</h5>
                                             <span>
-                                                <button class="btn btn-danger"><i class="ti-trash"></i>Supprimer selectionner</button>
+                                                <button type="submit" class="btn btn-danger"><i class="ti-trash"></i>Supprimer selectionner</button>
                                             </span>
                                             <div class="card-header-right">    <ul class="list-unstyled card-option">        <li><i class="icofont icofont-simple-left "></i></li>        <li><i class="icofont icofont-maximize full-card"></i></li>        <li><i class="icofont icofont-minus minimize-card"></i></li>        <li><i class="icofont icofont-refresh reload-card"></i></li>        <li><i class="icofont icofont-error close-card"></i></li>    </ul></div>
                                         </div>
@@ -100,30 +112,46 @@
                                                         <tr>
                                                             <th>#</th>
                                                             <th>Noms</th>
-                                                            <th>Tarif</th>
+                                                            <th>Description</th>
+                                                            <th>Atif</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {% if services %}
+                                                        {% for service in services %}
                                                         <tr>
                                                             <th scope="row">
-                                                                <input type="checkbox" id="">
+                                                                <input type="checkbox" name="services" value="{{ service.id }}">
                                                             </th>
-                                                            <td>Mark</td>
-                                                            <td>Otto</td>
+                                                            <td>{{service.noms}}</td>
+                                                            <td>{{service.description}}</td>
+                                                            <td>
+                                                                {% if service.actif %}
+                                                                Actif
+                                                                {% else %}
+                                                                Pas Actif
+                                                                {% endif %}
+
+                                                            </td>
                                                             <td>
                                                                
-                                                                <a href="" class="btn btn-primary btn-outline-primary btn-icon"><i class="iti-pencil"></i></a>
+                                                                <a href="{% url 'modifier-service' service.id %}" class="btn btn-primary btn-outline-primary btn-icon"><i class="ti-pencil"></i></a>
                                                                 <a href="" class="btn btn-success btn-outline-success btn-icon"><i class="icofont icofont-eye"></i></a>
                                                                
                                                             </td>
                                                         </tr>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                        <p>Aucun service eregistrer pour votre entreprise </p>
+                                                        {% endif %}
                                                         
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
+                                </form>
                                     <!-- Basic table card end -->
                                 </div>
                                 <!-- Page-body end -->

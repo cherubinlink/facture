@@ -49,7 +49,16 @@ urlpatterns = [
     path('entreprise/<int:entreprise_id>/supprimer_produit/', views.supprimer_produit, name='supprimer_produit'),
     
     # services
-    path('services',views.service,name='service'),
+    path('services/<int:entreprise_id>/',views.service,name='service'),
+    
+    # ajouter un service
+    path('ajouter_service/<int:entreprise_id>/service/ajouter',views.ajouter_service,name='ajouter-service'),
+    
+    # modifier service
+    path('modifier_service/<int:service_id>/',views.modifier_service,name='modifier-service'),
+    
+    # supprimer un ou plusieur sevices
+    path('entreprise/<int:entreprise_id>/supprimer_service/', views.supprimer_service,name='supprimer-service'),
     
     # client
     path('client/<int:entreprise_id>/',views.client,name='client'),

@@ -1,5 +1,5 @@
 from django import forms
-from fact_gest.models import Group,Company,Client,Produit
+from fact_gest.models import Group,Company,Client,Produit,Service
 
 
 
@@ -116,6 +116,26 @@ class ProduitForm(forms.ModelForm):
             'stock': forms.NumberInput(attrs={
                 'class': 'form-control', 
                 'placeholder': 'stock'
+            }),
+        }
+        
+
+class ServiceForm(forms.ModelForm):
+    class Meta:
+        model = Service
+        fields = ['noms','description','actif']
+        widgets = {
+            'noms': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Nom du service'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control', 
+                'placeholder': 'description du service'
+            }),
+            'actif': forms.CheckboxInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'actif'
             }),
         }
 
