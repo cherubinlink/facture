@@ -1,5 +1,5 @@
 from django import forms
-from fact_gest.models import Group,Company,Client,Produit,Service
+from fact_gest.models import Group,Company,Client,Produit,Service,Facture,Client,FactureProduit
 
 
 
@@ -65,19 +65,19 @@ class ClientForm(forms.ModelForm):
         widgets = {
             'noms': forms.TextInput(attrs={
                 'class': 'form-control', 
-                'placeholder': 'Nom'
+                'placeholder': 'Nom obligatoire'
             }),
               'email': forms.EmailInput(attrs={
                 'class': 'form-control', 
-                'placeholder': 'email'
+                'placeholder': 'email pas obligatoire'
             }),
             'adresse': forms.TextInput(attrs={
                 'class': 'form-control', 
-                'placeholder': 'Adresse'
+                'placeholder': 'Adresse pas obligatoire'
             }),
             'telephone': forms.TextInput(attrs={
                 'class': 'form-control', 
-                'placeholder': 'telephone'
+                'placeholder': 'telephone pas obligatoire'
             }),
           
         }
@@ -136,6 +136,47 @@ class ServiceForm(forms.ModelForm):
             'actif': forms.CheckboxInput(attrs={
                 'class': 'form-control', 
                 'placeholder': 'actif'
+            }),
+        }
+
+
+class FactureForm(forms.ModelForm):
+    class Meta:
+        model = Facture
+        fields = ['avance', 'total', 'status']
+        widgets = {
+            'avance': forms.NumberInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Avance facture'
+            }),
+            'total': forms.NumberInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Total facture'
+            }),
+            'status': forms.Select(attrs={
+                'class': 'form-control'
+            }),
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        if not self.instance.pk and not hasattr(self.instance, 'company'):
+            raise forms.ValidationError("Une entreprise doit être associée à cette facture.")
+        return cleaned_data
+        
+class FactureProduitForm(forms.ModelForm):
+    
+    class Meta:
+        model = FactureProduit
+        fields = ['produit','quantite']
+        widgets = {
+            'produit': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Nom du produits'
+            }),
+             'quantite': forms.NumberInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'quantite'
             }),
         }
 

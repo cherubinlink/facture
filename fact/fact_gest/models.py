@@ -140,5 +140,9 @@ class FactureProduit(models.Model):
     class Meta:
         verbose_name = 'facture produit'
         verbose_name_plural = 'factures produits'
+        
+        
+    def get_total(self):
+        return self.prix_unitaire * self.quantite
 
 

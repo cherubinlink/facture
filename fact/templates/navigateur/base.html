@@ -73,6 +73,31 @@
         function confirmDelete() {
             return confirm('Êtes-vous sûr de vouloir supprimer les sélectionnés ?');
         }
+
+        // ajouter un produire au formulaire
+        document.getElementById('add-product').addEventListener('click', function () {
+            const productsSection = document.getElementById('products-section'); // Section des produits
+            const totalFormsInput = document.querySelector('#id_form-TOTAL_FORMS'); // Compteur total des formulaires
+            const currentCount = parseInt(totalFormsInput.value); // Nombre actuel de formulaires
+
+            // Clone un formulaire vide
+            const emptyFormTemplate = document.querySelector('.product-form:last-of-type'); // Dernier formulaire
+            const newForm = emptyFormTemplate.cloneNode(true);
+
+            // Met à jour les index des champs dans le nouveau formulaire
+            newForm.innerHTML = newForm.innerHTML.replace(/form-\d+/g, `form-${currentCount}`);
+
+            // Supprime les valeurs des champs du nouveau formulaire
+            newForm.querySelectorAll('input').forEach(input => {
+                input.value = '';
+            });
+
+            // Ajoute le nouveau formulaire à la section des produits
+            productsSection.appendChild(newForm);
+
+            // Incrémente le compteur total des formulaires
+            totalFormsInput.value = currentCount + 1;
+        });
     </script>
 </body>
 </html>

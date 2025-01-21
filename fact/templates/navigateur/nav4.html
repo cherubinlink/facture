@@ -36,16 +36,16 @@
         <ul class="pcoded-item pcoded-left-item">
 
             <li class="">
-                <a href="{% url 'entreprise' entreprise.id %}">
-                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>E</b></span>
-                    <span class="pcoded-mtext text-capitalizer" data-i18n="nav.dash.main">{{entreprise.noms}}</span>
+                <a href="{% url 'accueil-user' %}">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>A</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Accueil</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li class="">
-                <a href="{% url 'accueil-user' %}">
-                    <span class="pcoded-micon"><i class="ti-home"></i><b>A</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Accueil</span>
+                <a href="{% url 'entreprise' entreprise.id %}" class="text-capitalize">
+                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>E</b></span>
+                    <span class="pcoded-mtext " data-i18n="nav.dash.main">{{entreprise.noms}}</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
@@ -98,7 +98,7 @@
                 </a>
             </li>
             <li>
-                <a href="{% url 'facture' %}">
+                <a href="{% url 'facture' entreprise.id %}">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>F</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Factures</span>
                     <span class="pcoded-mcaret"></span>

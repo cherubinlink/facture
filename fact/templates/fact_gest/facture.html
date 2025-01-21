@@ -48,6 +48,17 @@
                                 </div>
                             </div>
 
+                            {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
                             <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">
@@ -58,7 +69,7 @@
                                                 <div class="page-header-title">
                                                     <i class="icofont icofont-table bg-c-blue"></i>
                                                     <div class="d-inline">
-                                                        <h4>Gestions factures</h4>
+                                                        <h4>Gestions factures({{entreprise.noms}})</h4>
                                                         <span>il est important de concerver vos facture pour mieux connaitre l'evolution des ventes</span>
                                                     </div>
                                                 </div>
@@ -73,7 +84,7 @@
                                                     </li>
                                                     <li class="breadcrumb-item"><a href="{% url 'accueil-user' %}">Accueil</a>
                                                     </li>
-                                                    <li class="breadcrumb-item"><a href="#!">Ajouter</a>
+                                                    <li class="breadcrumb-item"><a href="{% url 'ajouter-facture' entreprise_id=entreprise.id %}">Ajouter</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -87,7 +98,7 @@
                                     <!-- Basic table card start -->
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Total facture</h5>
+                                            <h5>{{facture_count}} facture{% if facture_count != 0 and facture_count != 1 %}s {% endif %}</h5>
                                             <span>
                                                 <button class="btn btn-danger"><i class="ti-trash"></i>Supprimer selectionner</button>
                                             </span>
@@ -111,12 +122,14 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {% if factures %}
+                                                        {% for facture in factures %}
                                                         <tr>
                                                             <th scope="row">
                                                                 <input type="checkbox" id="">
                                                             </th>
                                                             <td>Mark</td>
-                                                            <td>Otto</td>
+                                                            <td>{{facture.client}}</td>
                                                             <td>Otto</td>
                                                             <td>Otto</td>
                                                             <td>Otto</td>
@@ -130,7 +143,10 @@
                                                                
                                                             </td>
                                                         </tr>
-                                                        
+                                                        {% endfor %}
+                                                        {% else %}
+                                                        <p>aucune facture enregistrer pour votre entreprise </p>
+                                                        {% endif %}
                                                     </tbody>
                                                 </table>
                                             </div>

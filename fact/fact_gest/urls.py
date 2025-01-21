@@ -73,7 +73,10 @@ urlpatterns = [
     path('entreprise/<int:entreprise_id>/supprimer_clients/', views.supprimer_clients, name='supprimer_clients'),
     
     # facture
-    path('facture',views.facture,name='facture'),
+    path('facture/<int:entreprise_id>/',views.facture,name='facture'),
+    
+    # ajouter facture
+    path('ajouter_facture/<int:entreprise_id>/facture/ajouter/',views.ajouter_facture,name='ajouter-facture'),
     
     # facture paye
     path('facture_paye',views.facture_paye,name='facture-paye'),

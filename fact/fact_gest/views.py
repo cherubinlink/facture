@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
-from fact_gest.forms import GroupForm,CompanyForm,ClientForm,ProduitForm,ServiceForm
-from fact_gest.models import Group,Company,Produit,Client,Facture,Service
+from fact_gest.forms import GroupForm,CompanyForm,ClientForm,ProduitForm,ServiceForm,FactureForm,FactureProduitForm
+from fact_gest.models import Group,Company,Produit,Client,Facture,Service,FactureProduit
 import logging
+from django.forms import inlineformset_factory
 
 logger = logging.getLogger(__name__)
 
@@ -547,8 +548,70 @@ def detail_client(request):
     
 
 # facture
-def facture(request):
-    return render(request,'fact_gest/facture.html')
+def facture(request, entreprise_id):
+    
+    entreprise = get_object_or_404(Company, id=entreprise_id)
+    search_query = request.GET.get('search', '').strip()
+    
+    if search_query:
+        factures = Facture.objects.filter(company=entreprise,  status__icontains=search_query).order_by('-id')
+    else:
+        factures = Facture.objects.filter(company=entreprise).order_by('-id')
+    
+    facture_count = factures.count()
+    
+    context = {
+        'entreprise':entreprise,
+        'factures':factures,
+        'facture_count':facture_count
+    }
+    return render(request,'fact_gest/facture.html',context)
+
+# ajouter une facture
+def ajouter_facture(request, entreprise_id):
+    company = get_object_or_404(Company, id=entreprise_id)
+    FactureProduitFormSet = inlineformset_factory(Facture, FactureProduit, form=FactureProduitForm, extra=1, can_delete=True)
+
+    if request.method == 'POST':
+        facture_form = FactureForm(request.POST)
+        client_form = ClientForm(request.POST)
+        formset = FactureProduitFormSet(request.POST)
+
+        if facture_form.is_valid() and client_form.is_valid() and formset.is_valid():
+            try:
+                # Crée le client
+                client = client_form.save()
+
+                # Crée la facture
+                facture = facture_form.save(commit=False)
+                facture.company = company
+                facture.client = client
+                facture.save()
+
+                # Associe les produits à la facture
+                produits = formset.save(commit=False)
+                for produit in produits:
+                    produit.facture = facture
+                    produit.save()
+
+                messages.success(request, "Facture ajoutée avec succès.")
+                return redirect('facture', entreprise_id=entreprise_id)
+            except Exception as e:
+                messages.error(request, f"Une erreur s'est produite : {e}")
+        else:
+            messages.error(request, "Veuillez corriger les erreurs dans le formulaire.")
+    else:
+        facture_form = FactureForm()
+        client_form = ClientForm()
+        formset = FactureProduitFormSet()
+
+    context = {
+        'facture_form': facture_form,
+        'client_form': client_form,
+        'formset': formset,
+        'company': company,
+    }
+    return render(request, 'fact_gest/ajouter_facture.html', context)
 
 # facture paye
 def facture_paye(request):
